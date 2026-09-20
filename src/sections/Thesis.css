@@ -1,0 +1,184 @@
+/* The Firefly render is bright and busy, so this section needs a much
+   heavier scrim than the hero to keep text readable. */
+.thesis-frames .sf-sticky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+      100deg,
+      rgba(4, 6, 13, 0.96) 0%,
+      rgba(4, 6, 13, 0.86) 38%,
+      rgba(4, 6, 13, 0.7) 70%,
+      rgba(4, 6, 13, 0.62) 100%
+    ),
+    radial-gradient(ellipse at 72% 50%, rgba(4, 6, 13, 0.55), transparent 70%);
+}
+
+.thesis-stage {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  padding-block: clamp(2rem, 6vh, 4rem);
+}
+
+.thesis-head {
+  max-width: 44ch;
+}
+
+.thesis-title {
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  margin-bottom: 0.9rem;
+}
+
+.thesis-brief {
+  color: var(--ink-dim);
+  font-size: 0.96rem;
+  margin: 0 0 var(--gap-sm);
+}
+
+.thesis-meter {
+  height: 3px;
+  width: 100%;
+  max-width: 260px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.thesis-meter-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.thesis-count {
+  margin-top: var(--gap-3xs);
+  font-size: 0.64rem;
+  color: var(--ink-faint);
+}
+
+/* ---------- stepped findings ---------- */
+
+.thesis-points-viewport {
+  position: relative;
+  height: min(70vh, 560px);
+  overflow: hidden;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 86%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 86%, transparent 100%);
+}
+
+.thesis-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.thesis-point {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  gap: 0.8rem;
+  padding: 1rem var(--gap-2xs);
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: rgba(4, 6, 13, 0.55);
+  opacity: 0.22;
+  transform: translate3d(0, 10px, 0) scale(0.985);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.55s ease, background 0.55s ease;
+}
+
+.thesis-point p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink-dim);
+}
+
+.thesis-point-n {
+  color: var(--ink-faint);
+  font-size: 0.68rem;
+  padding-top: 0.15rem;
+}
+
+.thesis-point.is-past {
+  opacity: 0.4;
+  transform: none;
+}
+
+.thesis-point.is-active {
+  opacity: 1;
+  transform: none;
+  border-color: rgba(34, 211, 238, 0.5);
+  background: rgba(6, 26, 38, 0.88);
+  box-shadow: 0 24px 60px -34px rgba(34, 211, 238, 0.9);
+}
+
+.thesis-point.is-active p {
+  color: var(--ink);
+}
+
+.thesis-point.is-active .thesis-point-n {
+  color: var(--cyan);
+}
+
+/* ---------- M.Sc. expand block ---------- */
+
+.thesis-expand {
+  position: relative;
+}
+
+.thesis-msc {
+  max-width: 62ch;
+  margin-inline: auto;
+  padding: var(--pad);
+  text-align: left;
+}
+
+.thesis-msc-title {
+  font-size: clamp(1.4rem, 3.2vw, 2.3rem);
+  margin-bottom: 0.9rem;
+}
+
+.thesis-msc-list {
+  margin: 1.2rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--ink-dim);
+  font-size: 0.92rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.thesis-msc-list li::marker {
+  color: var(--cyan);
+}
+
+@media (max-width: 900px) {
+  .thesis-stage {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 1.2rem;
+  }
+  .thesis-head {
+    max-width: none;
+  }
+  .thesis-brief {
+    display: none;
+  }
+  .thesis-points-viewport {
+    height: min(48vh, 360px);
+  }
+  .thesis-point p {
+    font-size: 0.82rem;
+  }
+}

@@ -1,0 +1,357 @@
+/* ============================================================
+   Raj Ankit — portfolio design system
+   Dark instrument-panel aesthetic: neon traces on a deep void.
+   ============================================================ */
+
+:root {
+  --void: #04060d;
+  --void-2: #070b18;
+  --panel: rgba(255, 255, 255, 0.035);
+  --panel-line: rgba(255, 255, 255, 0.09);
+
+  --cyan: #22d3ee;
+  --violet: #a855f7;
+  --sky: #38bdf8;
+  --amber: #f59e0b;
+  --pink: #f472b6;
+
+  --ink: #eef3fb;
+  --ink-dim: #9aa8bf;
+  --ink-faint: #64748b;
+
+  /* One real typeface, used everywhere — headings, body copy and the
+     tracked-caps "mono" labels all resolve to the same family. */
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display: var(--font);
+  --body: var(--font);
+  --mono: var(--font);
+
+  /* Spacing scale — every section uses these instead of inventing its own
+     clamp() range, so vertical rhythm stays consistent site-wide. */
+  --gap-3xs: 0.5rem;
+  --gap-2xs: 0.75rem;
+  --gap-xs: 1rem;
+  --gap-sm: 1.5rem;
+  --gap-md: clamp(2.5rem, 6vh, 4rem);   /* section header -> its content */
+  --gap-lg: clamp(4rem, 9vh, 6.5rem);   /* subsection -> subsection */
+  --card-pad: clamp(1.25rem, 3vw, 1.75rem);
+
+  --maxw: 1180px;
+  --pad: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
+}
+
+p,
+li {
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.32);
+  color: #fff;
+}
+
+/* --------- scrollbar --------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #05070f;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--cyan), var(--violet));
+  border-radius: 10px;
+  border: 2px solid #05070f;
+}
+
+/* ============================================================
+   Layout primitives
+   ============================================================ */
+
+.shell {
+  position: relative;
+  width: 100%;
+  /* `clip` contains stray horizontal overflow WITHOUT creating a scroll
+     container, so position: sticky keeps working. `hidden` would break it. */
+  overflow-x: clip;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(5rem, 12vh, 9rem);
+}
+
+/* section eyebrow: 001 / RESEARCH */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin: 0 0 var(--gap-2xs);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+}
+
+.h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 7.2vw, 5.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4.6vw, 3.2rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin: 0 0 var(--gap-xs);
+}
+
+.h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--gap-3xs);
+}
+
+.lead {
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  line-height: 1.6;
+  color: var(--ink-dim);
+  max-width: 62ch;
+  margin: 0;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.grad-text {
+  background: linear-gradient(100deg, var(--cyan) 0%, var(--sky) 35%, var(--violet) 78%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============================================================
+   Panels & cards
+   ============================================================ */
+
+.panel {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.panel-hover {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease, box-shadow 0.5s ease;
+}
+
+.panel-hover:hover {
+  transform: translateY(-6px);
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: 0 30px 70px -40px rgba(34, 211, 238, 0.7);
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease,
+    background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: linear-gradient(100deg, var(--cyan), var(--sky) 55%, var(--violet));
+  color: #04060d;
+  font-weight: 700;
+  box-shadow: 0 14px 40px -16px rgba(34, 211, 238, 0.75);
+}
+
+.btn--primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 22px 54px -18px rgba(168, 85, 247, 0.85);
+}
+
+.btn--ghost {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--ink);
+}
+
+.btn--ghost:hover {
+  transform: translateY(-3px);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow: 0 16px 42px -24px rgba(34, 211, 238, 0.9);
+}
+
+.bg-fixed {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* the aurora is deliberately oversized, so clip it here or it widens
+     the document and creates a horizontal scrollbar */
+  overflow: hidden;
+}
+
+.bg-aurora {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(38% 34% at 18% 22%, rgba(34, 211, 238, 0.16), transparent 70%),
+    radial-gradient(34% 32% at 82% 32%, rgba(168, 85, 247, 0.16), transparent 70%),
+    radial-gradient(44% 40% at 50% 92%, rgba(56, 189, 248, 0.12), transparent 72%);
+  filter: blur(12px);
+  animation: auroraDrift 26s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift {
+  0% {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(3%, 2%, 0) scale(1.1);
+  }
+}
+
+.bg-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.bg-scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.022) 0px,
+    rgba(255, 255, 255, 0.022) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  opacity: 0.6;
+}
+
+/* content sits above the frame sections */
+.layer {
+  position: relative;
+  z-index: 1;
+}
+
+/* solid backing for sections that follow a transparent frame section */
+.solid {
+  background: linear-gradient(180deg, rgba(4, 6, 13, 0.92), rgba(7, 11, 24, 0.96));
+}
+
+/* ============================================================
+   Utility
+   ============================================================ */
+
+.chip {
+  display: inline-block;
+  padding: 0.38rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+  transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.chip:hover {
+  color: var(--cyan);
+  border-color: rgba(34, 211, 238, 0.55);
+  background: rgba(34, 211, 238, 0.08);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,0 +1,315 @@
+.research-title {
+  max-width: 18ch;
+}
+
+.research-rows {
+  margin-top: var(--gap-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+
+.research-row > *,
+.research-copy,
+.research-copy-body > *,
+.research-copy-head > * {
+  min-width: 0;
+}
+
+.research-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 5vw, 4.5rem);
+  align-items: center;
+  position: relative;
+}
+
+.research-row.is-flipped .research-visual {
+  order: 2;
+}
+
+.research-row::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -3.5rem;
+  width: 1px;
+  height: 2.6rem;
+  background: linear-gradient(180deg, transparent, var(--accent));
+  opacity: 0.5;
+}
+
+.research-row:first-child::before {
+  display: none;
+}
+
+.research-visual {
+  position: relative;
+}
+
+/* Strip rows: the figure is a wide panel, so it spans the full width and the
+   copy runs underneath in two columns. */
+.research-row.is-strip {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.research-row.is-strip .research-copy-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1.2rem, 3.5vw, 3rem);
+  align-items: start;
+}
+
+.research-row.is-strip .research-copy-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: flex-start;
+  margin-bottom: 1.4rem;
+}
+
+.research-row.is-strip .research-index {
+  margin-bottom: 0;
+  line-height: 0.9;
+}
+
+.research-row.is-strip .research-tag {
+  margin-bottom: 0.35rem;
+}
+
+.research-row.is-strip .research-heading {
+  margin-bottom: 0;
+}
+
+.research-copy {
+  max-width: 100%;
+}
+
+.research-copy-titles {
+  min-width: 0;
+}
+
+/* Gallery row: three stacked shots beside the copy. */
+.research-row.is-gallery {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: start;
+}
+
+.research-row.is-gallery .research-copy {
+  position: sticky;
+  top: 6rem;
+}
+
+/* ---------- photo frames ---------- */
+
+.shot {
+  margin: 0;
+}
+
+.shot-btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #04070f;
+  cursor: zoom-in;
+  transition: border-color 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.55s ease;
+}
+
+.shot-btn:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 34px 80px -44px var(--accent);
+}
+
+.shot-btn img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  filter: saturate(1.04) contrast(1.03);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shot-btn:hover img {
+  transform: scale(1.025);
+}
+
+.shot-zoom {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #04060d;
+  background: var(--accent);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shot-btn:hover .shot-zoom {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.shot-cap {
+  margin-top: 0.7rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
+.shot-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+/* ---------- sensor gallery ---------- */
+
+.shot-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.shot--sm .shot-btn {
+  border-radius: 12px;
+}
+
+/* ---------- full-bleed banner ---------- */
+
+.research-banner {
+  position: relative;
+}
+
+.research-banner-copy {
+  max-width: 62ch;
+  margin-inline: auto;
+  padding: var(--pad);
+}
+
+.research-banner-copy .lead {
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
+
+.research-index {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 6vw, 4.1rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: rgba(34, 211, 238, 0.18);
+  -webkit-text-stroke: 1px rgba(34, 211, 238, 0.75);
+  opacity: 0.9;
+  margin-bottom: 0.4rem;
+  transform: translateY(-0.05em);
+}
+
+.research-tag {
+  margin: 0 0 0.6rem;
+  color: var(--accent);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+}
+
+.research-heading {
+  font-size: clamp(1.45rem, 3.1vw, 2.2rem);
+  margin-bottom: 0.7rem;
+  font-weight: 700;
+  line-height: 1.18;
+}
+
+.research-blurb {
+  margin: 0 0 0.9rem;
+  color: rgba(238, 243, 251, 0.96);
+  font-size: clamp(0.98rem, 1.5vw, 1.08rem);
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.research-detail {
+  margin: 0 0 1.2rem;
+  color: rgba(238, 243, 251, 0.82);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.research-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.research-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: rgba(238, 243, 251, 0.82);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.research-bullet {
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+
+.research-interests {
+  margin-top: var(--gap-lg);
+}
+
+.research-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 880px) {
+  .research-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+  .research-row.is-flipped .research-visual {
+    order: 0;
+  }
+  .research-row.is-gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .research-row.is-gallery .research-copy {
+    position: static;
+  }
+  .research-row.is-strip .research-copy-body,
+  .research-row.is-strip .research-copy-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .research-row::before {
+    left: 0;
+  }
+}

@@ -1,0 +1,41 @@
+.skill-grid {
+  margin-top: var(--gap-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.skill-card {
+  padding: var(--card-pad);
+  height: 100%;
+}
+
+.skill-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.skill-num {
+  font-size: 0.7rem;
+  color: var(--cyan);
+}
+
+.skill-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.skill-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-chip {
+  font-size: 0.66rem;
+}

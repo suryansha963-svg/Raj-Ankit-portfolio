@@ -1,0 +1,141 @@
+.pub-list {
+  list-style: none;
+  margin: var(--gap-md) 0 0;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pub-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pub-link {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) 2.2rem;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.5rem 0.6rem;
+  text-decoration: none;
+  position: relative;
+  transition: background 0.45s ease, padding-left 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pub-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--cyan), var(--violet));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pub-link:hover {
+  background: rgba(34, 211, 238, 0.05);
+  padding-left: 1.2rem;
+}
+
+.pub-link:hover::before {
+  transform: scaleY(1);
+}
+
+.pub-n {
+  font-size: 1.6rem;
+  font-family: var(--display);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(34, 211, 238, 0.65);
+  letter-spacing: 0;
+}
+
+.pub-authors {
+  margin: 0 0 0.35rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+  text-transform: none;
+}
+
+.pub-year {
+  color: var(--cyan);
+}
+
+.pub-title {
+  margin: 0 0 0.45rem;
+  font-family: var(--display);
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.pub-journal {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+}
+
+.pub-detail {
+  color: var(--ink-faint);
+}
+
+.pub-arrow {
+  color: var(--ink-faint);
+  display: grid;
+  place-items: center;
+  transition: color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pub-link:hover .pub-arrow {
+  color: var(--cyan);
+  transform: translate(3px, -3px);
+}
+
+/* ---------- conferences ---------- */
+
+.pub-conf {
+  margin-top: var(--gap-lg);
+}
+
+.conf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.conf-card {
+  padding: var(--card-pad);
+  height: 100%;
+}
+
+.conf-title {
+  margin: 0 0 0.7rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.conf-meta {
+  margin: 0;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  color: var(--cyan);
+}
+
+@media (max-width: 640px) {
+  .pub-link {
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    gap: 0.7rem;
+  }
+  .pub-arrow {
+    display: none;
+  }
+  .pub-n {
+    font-size: 1.15rem;
+  }
+}

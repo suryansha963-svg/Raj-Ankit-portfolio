@@ -1,0 +1,111 @@
+/* Sits in the research row's grid and spans every column, after the copy. */
+.research-videos {
+  grid-column: 1 / -1;
+  order: 3;
+  min-width: 0;
+}
+
+/* Each clip's flex-grow equals its aspect ratio, so widths are proportional
+   and every clip in the row ends up the same height — portrait and square
+   clips sit side by side with no letterboxing. The max-width caps that height. */
+.demo-row {
+  --demo-max-h: 440px;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin: 0.4rem auto 0;
+  max-width: calc(var(--demo-max-h) * var(--sum) + (var(--n) - 1) * 1rem);
+}
+
+.demo {
+  flex: var(--ar) 1 0%;
+  min-width: 0;
+  margin: 0;
+}
+
+/* Plays once on mount — not gated behind scroll position, so a clip never
+   sits invisible if it doesn't cross an intersection threshold. */
+.demo-enter {
+  animation: demoIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes demoIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-enter {
+    animation: none;
+  }
+}
+
+.demo-frame {
+  position: relative;
+  aspect-ratio: var(--ar);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+}
+
+.demo-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.demo-play {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: rgba(4, 6, 13, 0.28);
+  color: #04060d;
+  cursor: pointer;
+}
+
+.demo-play span {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  padding-left: 3px;
+  border-radius: 50%;
+  background: var(--cyan, var(--brand, #22d3ee));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.demo-play:hover span {
+  transform: scale(1.1);
+}
+
+.demo-play:focus-visible span {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .demo-row {
+    flex-direction: column;
+    align-items: center;
+    max-width: none;
+  }
+
+  .demo {
+    flex: none;
+    width: min(100%, 360px);
+  }
+}

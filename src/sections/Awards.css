@@ -1,0 +1,43 @@
+.award-grid {
+  margin-top: var(--gap-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(240px, 30%, 320px), 1fr));
+  gap: 1rem;
+}
+
+.award-card {
+  position: relative;
+  padding: var(--card-pad);
+  height: 100%;
+}
+
+.award-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  color: var(--cyan);
+  background: linear-gradient(140deg, rgba(34, 211, 238, 0.18), rgba(168, 85, 247, 0.14));
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  margin-bottom: 1rem;
+}
+
+.award-title {
+  font-size: 1.08rem;
+  margin-bottom: 0.3rem;
+}
+
+.award-meta {
+  margin: 0 0 0.8rem;
+  font-size: 0.63rem;
+  letter-spacing: 0.18em;
+  color: var(--violet);
+}
+
+.award-detail {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ink-dim);
+  line-height: 1.6;
+}

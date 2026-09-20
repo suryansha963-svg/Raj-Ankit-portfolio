@@ -1,0 +1,73 @@
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: rgba(2, 4, 10, 0.92);
+  animation: lbIn 0.3s ease;
+  cursor: zoom-out;
+}
+
+@keyframes lbIn {
+  from {
+    opacity: 0;
+  }
+}
+
+.lb-figure {
+  margin: 0;
+  max-width: min(1400px, 100%);
+  cursor: default;
+  animation: lbPop 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes lbPop {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(16px);
+  }
+}
+
+.lb-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid rgba(34, 211, 238, 0.32);
+  box-shadow: 0 50px 120px -50px rgba(34, 211, 238, 0.7);
+  background: #fff;
+}
+
+.lb-figure figcaption {
+  margin-top: 0.9rem;
+  text-align: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--cyan);
+}
+
+.lb-close {
+  position: absolute;
+  top: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.lb-close:hover {
+  background: rgba(34, 211, 238, 0.18);
+  color: var(--cyan);
+  transform: rotate(90deg);
+}
